@@ -24,6 +24,7 @@ grpc:
 	protoc --proto_path=proto proto/*.proto  --go_out=:. --go-grpc_out=:.
 
 build:
+	mkdir img
 	make grpc
 	make certs
 	go build -o grpc-upload main.go
