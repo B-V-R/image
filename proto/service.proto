@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "/pb;pb";
+
+message ImageInfo {
+  string name = 1;
+  string format = 2;
+}
+
+message Image {
+  oneof data {
+    ImageInfo info = 1;
+    bytes chunk = 2;
+  }
+}
+
+message Status {
+  string filename = 1;
+  string url = 2;
+}
+
+service ImageService {
+  rpc Save(stream Image) returns (Status) {}
+  rpc Delete(ImageInfo) returns (Status) {}
+}
