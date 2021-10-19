@@ -64,7 +64,8 @@ func (is ImageServer) Save(stream pb.ImageService_SaveServer) error {
 		return status.Error(codes.Unknown, "Un supported file format")
 	}
 
-	file, err := is.Store.Save(context.Background(), imageBuf.Bytes(), imageInfo.Name)
+	fileName := strings.Split(imageInfo.Name, "/")
+	file, err := is.Store.Save(context.Background(), imageBuf.Bytes(), strings.Split(imageInfo.Name, "/")[len(fileName)-1])
 	if err != nil {
 		is.Log.Err(err).Msg("Can not save file")
 		return status.Error(codes.Internal, "Can not save file")
