@@ -30,7 +30,6 @@ build:
 	go build -o grpc-upload main.go
 
 run:
-	make build
 	docker build --tag image .
 	docker run -it -p 8080:8080 image
 
